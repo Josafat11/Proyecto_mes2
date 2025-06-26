@@ -1,12 +1,13 @@
 import numpy as np
 import joblib
 from flask import Flask, request, jsonify, render_template
+import os  # 👈 Importar os para leer la variable de entorno PORT
 
 # Cargar modelo y scaler
 modelo = joblib.load('modelo_rfr.pkl')
 scaler = joblib.load('scaler_modelo.pkl')
 
-# Lista de atributos (orden IMPORTANTE)
+# Lista de atributos 
 atributos = ['Cement', 'Slag', 'FlyAsh', 'Water', 'Superplasticizer', 'Age']
 
 app = Flask(__name__)
@@ -32,4 +33,5 @@ def predecir():
         return render_template('formulario.html', prediccion='Error en los datos de entrada')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
