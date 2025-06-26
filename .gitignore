@@ -1,0 +1,5 @@
+*.ipynb
+*.csv
+.ipynb_checkpoints/
+modelo_mlp.pkl
+modelo_lineal.pkl
